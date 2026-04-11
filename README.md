@@ -46,21 +46,6 @@ A high-performance, **multi-device**, concurrent File Transfer Protocol implemen
 - The **client** is a standalone CLI tool that connects to the server using its IP and port, sends a structured request, and processes the response.
 
 ---
-
-## Project Structure
-
-```
-concurrent-ftp/
-├── server.c          # Server: socket setup, thread spawning, request handler
-├── client.c          # Client: argument parsing, socket connect, response display
-├── common.h          # Shared structs, constants, protocol definitions
-├── Makefile          # Build targets for server and client
-├── server_files/     # Directory served by the FTP server
-└── README.md
-```
-
----
-
 ## Network Setup
 
 This is a **multi-device socket programming project**. The server and clients do not need to be on the same machine — they communicate over standard TCP/IP.
