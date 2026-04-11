@@ -255,7 +255,6 @@ Uploads a local file from the client machine to the server.
 3. The **parent process** closes the connected client socket and immediately loops back to `accept()`, ready for the next client.
 4. The **child process** closes the listening socket, handles the full client session (request parsing → processing → response), then calls `exit()`.
 5. **System V IPC** (shared memory segments + semaphores) coordinates shared state (e.g., active connection counts, access logs) safely across the parent and all child processes.
-6. The parent handles `SIGCHLD` to reap zombie child processes and prevent resource leaks.
 
 ```
 Server (Parent Process)
