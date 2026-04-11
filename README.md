@@ -38,7 +38,7 @@ A high-performance, **multi-device**, concurrent File Transfer Protocol implemen
  └──────────────────────────────┘
 ```
 
-- **Multi-device design**: The server and clients are completely independent binaries. The server can run on one machine (bare-metal, VM, or cloud instance) while any number of clients on different machines connect to it over the network using the server's **IP address and port**.
+- **Multi-device design**: The server and clients are completely independent binaries. The server can run on one machine while any number of clients on different machines connect to it over the network using the server's **IP address and port**.
 - The **server (parent process)** binds to a port and calls `fork()` for every incoming client connection, spawning a **dedicated child process** to handle it — enabling true concurrent multi-client support.
 - The **parent process** immediately closes the connected socket and loops back to `accept()`, staying free to handle the next client.
 - The **child process** handles the full client session, then exits cleanly.
