@@ -8,7 +8,7 @@ A high-performance, **multi-device**, concurrent File Transfer Protocol implemen
 
 | Layer | Technology |
 |---|---|
-| Language | C (C11) |
+| Language | C (C13) |
 | Networking | POSIX Sockets (TCP/IP) |
 | Network Model | Multi-device — server and clients on separate machines |
 | Concurrency | `fork()` — child process per client |
