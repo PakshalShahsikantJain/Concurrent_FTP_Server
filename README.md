@@ -1,10 +1,10 @@
-# 📁 Concurrent FTP Server
+# Concurrent FTP Server
 
 A high-performance, **multi-device**, concurrent File Transfer Protocol implementation in **C** using **POSIX Sockets** and **`fork()`-based process concurrency**. The server and clients are designed to run on **separate physical machines** across a network — any client machine can connect to the server over TCP/IP using the server's IP address and port. Each client connection is handled by a dedicated **child process** spawned via `fork()`, enabling true simultaneous multi-client support with file listing, reading, stat inspection, uploading, and downloading — all from a clean command-line interface.
 
 ---
 
-## 🧰 Tech Stack
+## Tech Stack
 
 | Layer | Technology |
 |---|---|
@@ -17,7 +17,7 @@ A high-performance, **multi-device**, concurrent File Transfer Protocol implemen
 
 ---
 
-## 📐 Architecture Overview
+## Architecture Overview
 
 ```
   Machine A (e.g. 192.168.1.10)          Machine B (e.g. 192.168.1.20)
@@ -47,7 +47,7 @@ A high-performance, **multi-device**, concurrent File Transfer Protocol implemen
 
 ---
 
-## 🗂️ Project Structure
+## Project Structure
 
 ```
 concurrent-ftp/
@@ -61,7 +61,7 @@ concurrent-ftp/
 
 ---
 
-## 🌐 Network Setup
+## Network Setup
 
 This is a **multi-device socket programming project**. The server and clients do not need to be on the same machine — they communicate over standard TCP/IP.
 
@@ -83,7 +83,7 @@ sudo ufw allow 9000/tcp
 
 ---
 
-## ⚙️ Build Instructions
+## Build Instructions
 
 ### Prerequisites
 - GCC or Clang compiler
@@ -100,7 +100,7 @@ gcc client.c -o Client
 
 ---
 
-## 🚀 Usage
+## Usage
 
 ### Start the Server
 
@@ -251,7 +251,7 @@ Uploads a local file from the client machine to the server.
 
 ---
 
-## 📋 Command Summary
+## Command Summary
 
 | Command | Description | argc |
 |---|---|---|
@@ -263,7 +263,7 @@ Uploads a local file from the client machine to the server.
 
 ---
 
-## 🔄 How Concurrency Works
+## How Concurrency Works
 
 1. The server (parent process) enters an **accept loop**, waiting for incoming TCP connections.
 2. When a client connects, the server calls **`fork()`** to create a **child process** — an exact copy of the parent — to handle that client independently.
@@ -288,7 +288,7 @@ Server (Parent Process)
 
 ---
 
-## 🛡️ Key Design Decisions
+## Key Design Decisions
 
 - **`fork()`-per-client model**: Each client is served by an independent child process, providing strong isolation between sessions. A misbehaving client cannot affect others.
 - **Parent stays lean**: After `fork()`, the parent immediately closes the client socket and returns to `accept()` — minimising latency for the next incoming connection.
@@ -298,33 +298,32 @@ Server (Parent Process)
 
 ---
 
-## 🐛 Error Handling
+## Error Handling
 
 - Invalid argument count → prints usage and exits.
 - File not found on server → server returns an error message to the client.
 - Connection refused → client exits with a descriptive error.
 - `fork()` failure → server logs the error and continues accepting connections.
-- Zombie process prevention → parent registers a `SIGCHLD` handler to `waitpid()` on exited children.
 
 ---
 
-## 📌 Notes
+## Notes
 
 - Ensure the server is running **before** launching any client command.
 - Clients and the server **do not need to be on the same machine** — use the server's actual LAN or public IP address instead of `127.0.0.1` when connecting from a remote machine.
 - The server's working directory (where files are served from) must have appropriate read/write permissions.
 - For `-upload`, the local file must exist and be readable on the **client machine**.
 - For download, the file is saved on the **client machine** in the current working directory.
-- Tested on **Ubuntu 22.04 LTS** with GCC 11.
+- Tested on **Ubuntu Ubuntu 24.04.4 LTS LTS** with GCC 13.
 
 ---
 
-## 👤 Author
+## Author
 
 > Built as a Systems Programming project demonstrating concurrent network server design using low-level C primitives.
 
 ---
 
-## 📄 License
+## License
 
 This project is intended for **educational purposes**. Feel free to use, study, and extend.
