@@ -42,7 +42,7 @@ A high-performance, **multi-device**, concurrent File Transfer Protocol implemen
 - The **server (parent process)** binds to a port and calls `fork()` for every incoming client connection, spawning a **dedicated child process** to handle it — enabling true concurrent multi-client support.
 - The **parent process** immediately closes the connected socket and loops back to `accept()`, staying free to handle the next client.
 - The **child process** handles the full client session, then exits cleanly.
-- **System V IPC** (shared memory + semaphores) is used to safely share state (e.g., active connection count, access logs) across parent and child processes.
+- **System V IPC** (Socket) is used to safely share state across Server and Client processes.
 - The **client** is a standalone CLI tool that connects to the server using its IP and port, sends a structured request, and processes the response.
 
 ---
