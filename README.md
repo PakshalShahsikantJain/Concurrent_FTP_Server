@@ -2,6 +2,7 @@
 
 This project demonstrates how socket programming in Linux is used to build a File Transfer System where
 multiple clients can connect to a server simultaneously and download files.
+
 The server listens on a specifc port, accepts client requests, and sends the requested fle over the network. Each client
 is handled in a separate process using fork(), which allows multiple users to download files at the same time
 without blocking others.
