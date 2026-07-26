@@ -1,6 +1,10 @@
 # Concurrent FTP Server
 
-A high-performance, **multi-device**, concurrent File Transfer Protocol implementation in **C** using **POSIX Sockets** and **`fork()`-based process concurrency**. The server and clients are designed to run on **separate physical machines** across a network — any client machine can connect to the server over TCP/IP using the server's IP address and port. Each client connection is handled by a dedicated **child process** spawned via `fork()`, enabling true simultaneous multi-client support with file listing, reading, stat inspection, uploading, and downloading — all from a clean command-line interface.
+This project demonstrates how socket programming in Linux is used to build a File Transfer System where
+multiple clients can connect to a server simultaneously and download files.
+The server listens on a specifc port, accepts client requests, and sends the requested fle over the network. Each client
+is handled in a separate process using fork(), which allows multiple users to download files at the same time
+without blocking others.
 
 ---
 
