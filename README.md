@@ -12,7 +12,7 @@ A high-performance, **multi-device**, concurrent File Transfer Protocol implemen
 | Networking | POSIX Sockets (TCP/IP) |
 | Network Model | Multi-device — server and clients on separate machines |
 | Concurrency | `fork()` — child process per client |
-| IPC | System V IPC (Shared Memory + Semaphores) |
+| IPC | System V IPC using Socket |
 | OS | Linux / Unix |
 
 ---
@@ -73,7 +73,6 @@ sudo ufw allow 9000/tcp
 ### Prerequisites
 - GCC or Clang compiler
 - Linux / Unix OS
-- `pthreads` library (usually pre-installed)
 
 ### Compile
 
