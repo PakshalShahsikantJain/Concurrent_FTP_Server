@@ -291,7 +291,7 @@ Server (Parent Process)
 - The server's working directory (where files are served from) must have appropriate read/write permissions.
 - For `-upload`, the local file must exist and be readable on the **client machine**.
 - For download, the file is saved on the **client machine** in the current working directory.
-- Tested on **Ubuntu Ubuntu 24.04.4 LTS LTS** with GCC 13.
+- Tested on **Ubuntu 24.04.4 LTS** with GCC 13.
 
 ---
 
