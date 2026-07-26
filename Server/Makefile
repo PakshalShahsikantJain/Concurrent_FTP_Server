@@ -7,10 +7,10 @@ TARGET = app
 $(TARGET): $(OBJ)
 	$(CC) $(OBJ) -o $(TARGET)
 
-Server.o: Server.c helper.h
+Server.o: Server.c header.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
-helper.o: helper.c helper.h
+helper.o: helper.c header.h
 	$(CC) $(CFLAGS)	-c $< -o $@
 
 clean:
