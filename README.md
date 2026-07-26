@@ -253,7 +253,6 @@ Uploads a local file from the client machine to the server.
 2. When a client connects, the server calls **`fork()`** to create a **child process** — an exact copy of the parent — to handle that client independently.
 3. The **parent process** closes the connected client socket and immediately loops back to `accept()`, ready for the next client.
 4. The **child process** closes the listening socket, handles the full client session (request parsing → processing → response), then calls `exit()`.
-5. **System V IPC** (shared memory segments + semaphores) coordinates shared state (e.g., active connection counts, access logs) safely across the parent and all child processes.
 
 ```
 Server (Parent Process)
@@ -268,16 +267,6 @@ Server (Parent Process)
 ```
 
 > Each child process gets its own **separate memory space**, making the design robust — a crash in one client handler cannot corrupt another client's session.
-
----
-
-## Key Design Decisions
-
-- **`fork()`-per-client model**: Each client is served by an independent child process, providing strong isolation between sessions. A misbehaving client cannot affect others.
-- **Parent stays lean**: After `fork()`, the parent immediately closes the client socket and returns to `accept()` — minimising latency for the next incoming connection.
-- **System V IPC**: Used for robust inter-process shared state management (shared memory + semaphore-based mutual exclusion) since child processes do not share memory with the parent after `fork()`.
-- **Protocol design**: The client sends a structured request (command + optional filename) over the TCP stream; the server parses it and streams back the response.
-- **Binary-safe file transfer**: Both upload and download use raw byte streaming over the socket, ensuring binary files (images, executables) transfer correctly alongside text files.
 
 ---
 
